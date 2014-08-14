@@ -1,14 +1,12 @@
 package net.darkcrow.hauntedinfestation.entitys;
 
 import net.darkcrow.hauntedinfestation.HauntedInfestation;
-import net.darkcrow.hauntedinfestation.util.Reference;
 import net.minecraft.entity.Entity;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class HIEntitys {
     
-    public static void init () {
+    public HIEntitys() {
     
         registerEntity(EntitySoul.class, "soul", 1, 0x000000, 0xffffff, 30, 5, true);
     }

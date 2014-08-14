@@ -27,9 +27,9 @@ public class HauntedInfestation {
     public void preInit (FMLPreInitializationEvent event) {
     
         setModInfo(event.getModMetadata());
-        HIBlocks.init();
-        HIItems.init();
-        HIEntitys.init();
+        new HIBlocks();
+        new HIItems();
+        new HIEntitys();
     }
     
     @Mod.EventHandler

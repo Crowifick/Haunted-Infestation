@@ -7,10 +7,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class HIItems {
     
     public static final String MODID = Reference.MODID;
-    
     public static final Item spawnEgg = new ItemHauntedSpawner().setUnlocalizedName("hauntedSpawner").setTextureName("spawn_egg");
     
-    public static void init () {
+    public HIItems() {
     
         GameRegistry.registerItem(spawnEgg, "hauntedSpawner", MODID);
     }
