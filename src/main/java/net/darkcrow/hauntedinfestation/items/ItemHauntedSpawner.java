@@ -62,118 +62,113 @@ public class ItemHauntedSpawner extends Item {
         return entityegginfo != null ? (pass == 0 ? entityegginfo.primaryColor : entityegginfo.secondaryColor) : 16777215;
     }
     
-    /**
-     * This is used to trigger the spawning of the mob.
-     */
-    @Override
-    public boolean onItemUse (ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float f1, float f2, float f3) {
+    public boolean onItemUse (ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
     
-        if (!world.isRemote) {
-            
+        if (world.isRemote) {
+            return true;
+        }
+        else {
             Block block = world.getBlock(x, y, z);
-            x += Facing.offsetsXForSide[side];
-            y += Facing.offsetsYForSide[side];
-            z += Facing.offsetsZForSide[side];
+            x += Facing.offsetsXForSide[p_77648_7_];
+            y += Facing.offsetsYForSide[p_77648_7_];
+            z += Facing.offsetsZForSide[p_77648_7_];
             double d0 = 0.0D;
             
-            if (side == 1 && block.getRenderType() == 11) {
-                
+            if (p_77648_7_ == 1 && block.getRenderType() == 11) {
                 d0 = 0.5D;
             }
             
             Entity entity = spawnCreature(world, stack.getItemDamage(), (double) x + 0.5D, (double) y + d0, (double) z + 0.5D);
             
             if (entity != null) {
-                
-                if (entity instanceof EntityLivingBase && stack.hasDisplayName())
+                if (entity instanceof EntityLivingBase && stack.hasDisplayName()) {
                     ((EntityLiving) entity).setCustomNameTag(stack.getDisplayName());
+                }
                 
-                if (!player.capabilities.isCreativeMode)
+                if (!player.capabilities.isCreativeMode) {
                     --stack.stackSize;
+                }
             }
+            
+            return true;
         }
-        
-        return true;
     }
     
     /**
-     * Basically the same as onItemUse. Has some special cases for it.
+     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    @Override
-    public ItemStack onItemRightClick (ItemStack stack, World world, EntityPlayer player) {
+    public ItemStack onItemRightClick (ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_) {
     
-        if (!world.isRemote) {
+        if (p_77659_2_.isRemote) {
+            return p_77659_1_;
+        }
+        else {
+            MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(p_77659_2_, p_77659_3_, true);
             
-            MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, player, true);
-            
-            if (movingobjectposition != null) {
-                
+            if (movingobjectposition == null) {
+                return p_77659_1_;
+            }
+            else {
                 if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+                    int i = movingobjectposition.blockX;
+                    int j = movingobjectposition.blockY;
+                    int k = movingobjectposition.blockZ;
                     
-                    int x = movingobjectposition.blockX;
-                    int y = movingobjectposition.blockY;
-                    int z = movingobjectposition.blockZ;
+                    if (!p_77659_2_.canMineBlock(p_77659_3_, i, j, k)) {
+                        return p_77659_1_;
+                    }
                     
-                    if (!world.canMineBlock(player, x, y, z))
-                        return stack;
+                    if (!p_77659_3_.canPlayerEdit(i, j, k, movingobjectposition.sideHit, p_77659_1_)) {
+                        return p_77659_1_;
+                    }
                     
-                    if (!player.canPlayerEdit(x, y, z, movingobjectposition.sideHit, stack))
-                        return stack;
-                    
-                    if (world.getBlock(x, y, z) instanceof BlockLiquid) {
-                        
-                        Entity entity = spawnCreature(world, stack.getItemDamage(), (double) x, (double) y, (double) z);
+                    if (p_77659_2_.getBlock(i, j, k) instanceof BlockLiquid) {
+                        Entity entity = spawnCreature(p_77659_2_, p_77659_1_.getItemDamage(), (double) i, (double) j, (double) k);
                         
                         if (entity != null) {
+                            if (entity instanceof EntityLivingBase && p_77659_1_.hasDisplayName()) {
+                                ((EntityLiving) entity).setCustomNameTag(p_77659_1_.getDisplayName());
+                            }
                             
-                            if (entity instanceof EntityLivingBase && stack.hasDisplayName())
-                                ((EntityLiving) entity).setCustomNameTag(stack.getDisplayName());
-                            
-                            if (!player.capabilities.isCreativeMode)
-                                --stack.stackSize;
+                            if (!p_77659_3_.capabilities.isCreativeMode) {
+                                --p_77659_1_.stackSize;
+                            }
                         }
                     }
                 }
+                
+                return p_77659_1_;
             }
         }
-        
-        return stack;
     }
     
     /**
-     * Custom method created to spawn a creature in the world using our data.
-     * 
-     * @param world: An instance of the world you wish to spawn the mob.
-     * @param id: A unique id for the entity you wish to spawn.
-     * @param x: The x coordinate to spawn at.
-     * @param y: The y coordinate to spawn at.
-     * @param z: The z coordinate to spawn at.
-     * @return Entity: The custom entity being spaened.
+     * Spawns the creature specified by the egg's type in the location specified by the last three parameters. Parameters: world, entityID, x, y, z.
      */
-    public static Entity spawnCreature (World world, int id, double x, double y, double z) {
+    public static Entity spawnCreature (World p_77840_0_, int p_77840_1_, double p_77840_2_, double p_77840_4_, double p_77840_6_) {
     
-        Entity entity = null;
-        
-        if (!HIEntityList.entityEggs.containsKey(Integer.valueOf(id))) {
+        if (!HIEntityList.entityEggs.containsKey(Integer.valueOf(p_77840_1_))) {
+            return null;
+        }
+        else {
+            Entity entity = null;
             
             for (int j = 0; j < 1; ++j) {
-                
-                entity = HIEntityList.createEntityByID(id, world);
+                entity = HIEntityList.createEntityByID(p_77840_1_, p_77840_0_);
                 
                 if (entity != null && entity instanceof EntityLivingBase) {
-                    
                     EntityLiving entityliving = (EntityLiving) entity;
-                    entity.setLocationAndAngles(x, y, z, MathHelper.wrapAngleTo180_float(world.rand.nextFloat() * 360.0F), 0.0F);
+                    entity.setLocationAndAngles(p_77840_2_, p_77840_4_, p_77840_6_, MathHelper.wrapAngleTo180_float(p_77840_0_.rand.nextFloat() * 360.0F), 0.0F);
                     entityliving.rotationYawHead = entityliving.rotationYaw;
                     entityliving.renderYawOffset = entityliving.rotationYaw;
                     entityliving.onSpawnWithEgg((IEntityLivingData) null);
-                    world.spawnEntityInWorld(entity);
+                    p_77840_0_.spawnEntityInWorld(entity);
                     entityliving.playLivingSound();
                 }
             }
+            
+            return entity;
         }
-        
-        return entity;
     }
     
     /**

@@ -2,6 +2,7 @@ package net.darkcrow.hauntedinfestation.entitys;
 
 import net.darkcrow.hauntedinfestation.HauntedInfestation;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntitySilverfish;
 import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class HIEntitys {

@@ -30,6 +30,7 @@ public class HauntedInfestation {
         new HIBlocks();
         new HIItems();
         new HIEntitys();
+        proxy.registerRenders();
     }
     
     @Mod.EventHandler
