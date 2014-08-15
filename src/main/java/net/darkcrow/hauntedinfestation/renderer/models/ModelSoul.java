@@ -7,16 +7,18 @@ import net.minecraft.util.MathHelper;
 
 public class ModelSoul extends ModelBase {
     
-    public static ModelRenderer head;
+    boolean entity = true;
+    ModelRenderer head;
     ModelRenderer headgear;
     ModelRenderer body;
     ModelRenderer rightarm;
     ModelRenderer leftarm;
     
-    public ModelSoul() {
+    public ModelSoul(boolean isEntity) {
     
         textureWidth = 64;
         textureHeight = 32;
+        entity = isEntity;
         
         head = new ModelRenderer(this, 0, 0);
         head.addBox(-4F, -8F, -4F, 8, 8, 8);
@@ -81,13 +83,16 @@ public class ModelSoul extends ModelBase {
     
     public void setRotationAngles (float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
     
-        this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
-        this.head.rotateAngleX = par5 / (180F / (float) Math.PI);
-        this.headgear.rotateAngleY = this.head.rotateAngleY;
-        this.headgear.rotateAngleX = this.head.rotateAngleX;
-        this.rightarm.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 2.0F * par2 * 0.5F;
-        this.leftarm.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
-        this.rightarm.rotateAngleZ = 0.0F;
-        this.leftarm.rotateAngleZ = 0.0F;
+        if (this.entity) {
+            
+            this.head.rotateAngleY = par4 / (180F / (float) Math.PI);
+            this.head.rotateAngleX = par5 / (180F / (float) Math.PI);
+            this.headgear.rotateAngleY = this.head.rotateAngleY;
+            this.headgear.rotateAngleX = this.head.rotateAngleX;
+            this.rightarm.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 2.0F * par2 * 0.5F;
+            this.leftarm.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 2.0F * par2 * 0.5F;
+            this.rightarm.rotateAngleZ = 0.0F;
+            this.leftarm.rotateAngleZ = 0.0F;
+        }
     }
 }
