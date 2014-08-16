@@ -53,7 +53,7 @@ public class Utilities {
     }
     
     public static void spawnItemStack (World world, int x, int y, int z, ItemStack stack) {
-        
+    
         if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
             
             float f = 0.7F;

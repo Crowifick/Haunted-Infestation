@@ -78,10 +78,11 @@ public class TileEntitySoulStatue extends TileEntity {
     
     /**
      * Retrieves the meta data for the stored block.
+     * 
      * @return int: The stored blocks meta data value.
      */
-    public int getBlockMeta() {
-        
+    public int getBlockMeta () {
+    
         return blockMeta;
     }
     

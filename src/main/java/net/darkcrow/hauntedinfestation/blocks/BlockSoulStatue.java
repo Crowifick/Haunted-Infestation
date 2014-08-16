@@ -17,9 +17,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.BlockEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -56,7 +53,7 @@ public class BlockSoulStatue extends BlockContainer {
         
         tile.setPlayerName(stack.getDisplayName());
         tile.setBlock(stack.stackTagCompound.getString("blockid"), stack.stackTagCompound.getInteger("blockmeta"));
-        tile.setPossessed(stack.stackTagCompound.getBoolean("isPossessed"));        
+        tile.setPossessed(stack.stackTagCompound.getBoolean("isPossessed"));
         tile.setDirection(MathHelper.floor_double((double) ((living.rotationYaw * 4F) / 360F) + 0.5D) & 3);
     }
     
@@ -109,7 +106,7 @@ public class BlockSoulStatue extends BlockContainer {
     
     @Override
     public boolean removedByPlayer (World world, EntityPlayer player, int x, int y, int z) {
-        
+    
         ItemStack stack = new ItemStack(HIBlocks.soulStatue);
         TileEntitySoulStatue tile = (TileEntitySoulStatue) world.getTileEntity(x, y, z);
         stack.setTagCompound(new NBTTagCompound());
