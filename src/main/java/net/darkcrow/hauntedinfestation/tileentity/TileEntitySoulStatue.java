@@ -77,6 +77,15 @@ public class TileEntitySoulStatue extends TileEntity {
     }
     
     /**
+     * Retrieves the meta data for the stored block.
+     * @return int: The stored blocks meta data value.
+     */
+    public int getBlockMeta() {
+        
+        return blockMeta;
+    }
+    
+    /**
      * Sets the direction that this block should be facing.
      * 
      * @param direction: The direction this block should be facing.
