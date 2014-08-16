@@ -1,6 +1,9 @@
 package net.darkcrow.hauntedinfestation.tileentity;
 
+import net.darkcrow.hauntedinfestation.entitys.EntitySoul;
+import net.darkcrow.hauntedinfestation.util.Utilities;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -16,6 +19,7 @@ public class TileEntitySoulStatue extends TileEntity {
     private String blockID = "stone";
     private int blockMeta = 0;
     private int orientation = 0;
+    private boolean isPossessed = true;
     
     public void setPlayerName (String username) {
     
@@ -48,6 +52,16 @@ public class TileEntitySoulStatue extends TileEntity {
         return orientation;
     }
     
+    public void setPossessed (boolean possessed) {
+    
+        isPossessed = possessed;
+    }
+    
+    public boolean getPossessed () {
+    
+        return isPossessed;
+    }
+    
     @Override
     public void onDataPacket (NetworkManager net, S35PacketUpdateTileEntity pkt) {
     
@@ -71,6 +85,7 @@ public class TileEntitySoulStatue extends TileEntity {
         orientation = nbt.getInteger("direction");
         blockID = nbt.getString("blockid");
         blockMeta = nbt.getInteger("blockmeta");
+        isPossessed = nbt.getBoolean("isPossessed");
     }
     
     @Override
@@ -81,6 +96,25 @@ public class TileEntitySoulStatue extends TileEntity {
         nbt.setInteger("direction", orientation);
         nbt.setString("blockid", blockID);
         nbt.setInteger("blockmeta", blockMeta);
+        nbt.setBoolean("isPossessed", isPossessed);
+    }
+    
+    @Override
+    public void updateEntity () {
+    
+        if (this.worldObj != null && !this.worldObj.playerEntities.isEmpty() && this.isPossessed) {
+            
+            for (Object playerObj : this.worldObj.playerEntities) {
+                
+                if (playerObj instanceof EntityPlayer) {
+                    
+                    EntityPlayer player = (EntityPlayer) playerObj;
+                    
+                    if (!player.capabilities.isCreativeMode && Utilities.isEntityWithinRange(player, xCoord, yCoord, zCoord, 5.0))
+                        awakenStatue();
+                }
+            }
+        }
     }
     
     public IIcon getBlockIcon () {
@@ -92,5 +126,17 @@ public class TileEntitySoulStatue extends TileEntity {
         
         else
             return Blocks.stone.getIcon(0, 0);
+    }
+    
+    public void awakenStatue () {
+    
+        if (!worldObj.isRemote) {
+            
+            EntitySoul soul = new EntitySoul(worldObj);
+            soul.setLocationAndAngles(xCoord, yCoord, zCoord, 0, 0);
+            soul.setCustomNameTag(playerName);
+            worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.air);
+            worldObj.spawnEntityInWorld(soul);
+        }
     }
 }

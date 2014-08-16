@@ -12,15 +12,12 @@ import org.lwjgl.opengl.GL11;
 public class RenderTileEntitySoul extends TileEntitySpecialRenderer {
     
     public ResourceLocation texture;
+    public ResourceLocation stone = new ResourceLocation("minecraft", "textures/blocks/stone.png");
     private ModelSoul model = new ModelSoul(false);
-    
-    public RenderTileEntitySoul() {
-    
-    }
     
     public void renderModel (TileEntitySoulStatue te, double d, double d1, double d2, float f) {
     
-        if (te.getPlayerName() != null && !te.getPlayerName().equalsIgnoreCase("statue")) {
+        if (te.getPlayerName() != null && !te.getPlayerName().isEmpty()) {
             
             texture = AbstractClientPlayer.getLocationSkin(te.getPlayerName());
             AbstractClientPlayer.getDownloadImageSkin(texture, te.getPlayerName());
@@ -50,7 +47,6 @@ public class RenderTileEntitySoul extends TileEntitySpecialRenderer {
         this.bindTexture(texture);
         model.renderAll();
         GL11.glPopMatrix();
-        
     }
     
     @Override
