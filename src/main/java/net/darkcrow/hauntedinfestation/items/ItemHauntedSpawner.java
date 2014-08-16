@@ -95,7 +95,8 @@ public class ItemHauntedSpawner extends Item {
     }
     
     /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+     * Called whenever this item is equipped and the right mouse button is pressed. Args:
+     * itemStack, world, entityPlayer
      */
     public ItemStack onItemRightClick (ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_) {
     
@@ -143,7 +144,8 @@ public class ItemHauntedSpawner extends Item {
     }
     
     /**
-     * Spawns the creature specified by the egg's type in the location specified by the last three parameters. Parameters: world, entityID, x, y, z.
+     * Spawns the creature specified by the egg's type in the location specified by the last
+     * three parameters. Parameters: world, entityID, x, y, z.
      */
     public static Entity spawnCreature (World p_77840_0_, int p_77840_1_, double p_77840_2_, double p_77840_4_, double p_77840_6_) {
     
@@ -172,7 +174,8 @@ public class ItemHauntedSpawner extends Item {
     }
     
     /**
-     * This item takes advantage of multiple render passes to create the different colors for the overlay.
+     * This item takes advantage of multiple render passes to create the different colors for
+     * the overlay.
      */
     @SideOnly(Side.CLIENT)
     public boolean requiresMultipleRenderPasses () {
@@ -181,7 +184,8 @@ public class ItemHauntedSpawner extends Item {
     }
     
     /**
-     * Used to grab a different icon for ech render stage. 0 = base, 1 = primary, 2 = secondary.
+     * Used to grab a different icon for ech render stage. 0 = base, 1 = primary, 2 =
+     * secondary.
      */
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamageForRenderPass (int damage, int pass) {

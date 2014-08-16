@@ -44,7 +44,8 @@ public class HauntedInfestation {
     }
     
     /**
-     * Method used to provide information on the mod. This is the code equivalent of a mcmod.info file.
+     * Method used to provide information on the mod. This is the code equivalent of a
+     * mcmod.info file.
      * 
      * @param meta: An instance of the ModMetadata.
      */
