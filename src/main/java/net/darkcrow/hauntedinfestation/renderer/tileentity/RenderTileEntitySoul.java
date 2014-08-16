@@ -25,7 +25,7 @@ public class RenderTileEntitySoul extends TileEntitySpecialRenderer {
         
         else {
             
-            texture = new ResourceLocation("haunted", "textures/mobs/lost_soul.png");
+            texture = new ResourceLocation("minecraft", "textures/entity/steve.png");
         }
         
         GL11.glPushMatrix();

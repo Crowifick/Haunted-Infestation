@@ -15,8 +15,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderSoul extends RenderLiving {
-    private static final ResourceLocation texture = new ResourceLocation("haunted", "textures/mobs/lost_soul.png");
     
+    private static final ResourceLocation texture = new ResourceLocation("minecraft", "textures/entity/steve.png");
     Minecraft mc = Minecraft.getMinecraft();
     
     public RenderSoul(ModelSoul model, float size) {

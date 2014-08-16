@@ -21,6 +21,19 @@ public class TileEntitySoulStatue extends TileEntity {
     private int orientation = 0;
     private boolean isPossessed = true;
     
+    public TileEntitySoulStatue(String username, String blockName, int meta, int direction, boolean possessed) {
+    
+        playerName = username;
+        blockID = blockName;
+        blockMeta = meta;
+        orientation = direction;
+        isPossessed = possessed;
+    }
+    
+    public TileEntitySoulStatue() {
+    
+    }
+    
     /**
      * Sets the username of the player that this statue will represent.
      * 
