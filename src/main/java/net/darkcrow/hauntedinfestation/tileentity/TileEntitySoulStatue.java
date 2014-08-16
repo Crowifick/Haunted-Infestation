@@ -21,45 +21,118 @@ public class TileEntitySoulStatue extends TileEntity {
     private int orientation = 0;
     private boolean isPossessed = true;
     
+    /**
+     * Sets the username of the player that this statue will represent.
+     * 
+     * @param username: The username of the player to represent.
+     */
     public void setPlayerName (String username) {
     
         playerName = username;
     }
     
+    /**
+     * Retrieves the username of the player that the statue represents.
+     * 
+     * @return String: The represented username.
+     */
     public String getPlayerName () {
     
         return playerName;
     }
     
+    /**
+     * Sets the block info used for the stand.
+     * 
+     * @param id: The string ID for the block.
+     * @param meta: The metadata value for the block.
+     */
     public void setBlock (String id, int meta) {
     
         blockID = id;
         blockMeta = meta;
     }
     
+    /**
+     * Retrieves the String ID for the block used in the base stand.
+     * 
+     * @return String: The String ID for the block.
+     */
     public String getBlockID () {
     
         return blockID;
     }
     
+    /**
+     * Sets the direction that this block should be facing.
+     * 
+     * @param direction: The direction this block should be facing.
+     */
     public void setDirection (int direction) {
     
         orientation = direction;
     }
     
+    /**
+     * Retrieves the direction that this block is curently facing.
+     * 
+     * @return int: The integer value of the position.
+     */
     public int getDirection () {
     
         return orientation;
     }
     
+    /**
+     * Sets this statue as being possessed.
+     * 
+     * @param possessed: Is this statue possessed?
+     */
     public void setPossessed (boolean possessed) {
     
         isPossessed = possessed;
     }
     
+    /**
+     * Checks if the statue is possessed or not.
+     * 
+     * @return boolean: Is this statue possesed?
+     */
     public boolean getPossessed () {
     
         return isPossessed;
+    }
+    
+    /**
+     * Retrieves the IIcon to use for the bottom stand of the block.
+     * 
+     * @return IIcon: The icon to be used for the bottom of the statue.
+     */
+    public IIcon getBlockIcon () {
+    
+        Block block = Block.getBlockFromName(blockID);
+        IIcon icon = block.getIcon(0, blockMeta);
+        if (block != null && icon != null)
+            return icon;
+        
+        else
+            return Blocks.stone.getIcon(0, 0);
+    }
+    
+    /**
+     * Awakens the statue, spawning an EnttiySoul where the statue is standing, and deletes the
+     * statue.
+     */
+    public void awakenStatue () {
+    
+        if (!worldObj.isRemote) {
+            
+            EntitySoul soul = new EntitySoul(worldObj);
+            soul.setLocationAndAngles(xCoord, yCoord, zCoord, 0, 0);
+            soul.setCustomNameTag(playerName);
+            worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.air);
+            worldObj.spawnEntityInWorld(soul);
+        }
     }
     
     @Override
@@ -114,29 +187,6 @@ public class TileEntitySoulStatue extends TileEntity {
                         awakenStatue();
                 }
             }
-        }
-    }
-    
-    public IIcon getBlockIcon () {
-    
-        Block block = Block.getBlockFromName(blockID);
-        IIcon icon = block.getIcon(0, blockMeta);
-        if (block != null && icon != null)
-            return icon;
-        
-        else
-            return Blocks.stone.getIcon(0, 0);
-    }
-    
-    public void awakenStatue () {
-    
-        if (!worldObj.isRemote) {
-            
-            EntitySoul soul = new EntitySoul(worldObj);
-            soul.setLocationAndAngles(xCoord, yCoord, zCoord, 0, 0);
-            soul.setCustomNameTag(playerName);
-            worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.air);
-            worldObj.spawnEntityInWorld(soul);
         }
     }
 }
