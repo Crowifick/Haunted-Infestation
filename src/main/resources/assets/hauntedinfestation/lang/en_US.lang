@@ -1,0 +1,10 @@
+#blocks
+tile.soulStatue.name=Wandering Soul Statue
+
+#items
+item.hauntedSpawner.name=Summon
+
+#entities 
+entity.soul.name=Wandering Soul
+
+#misc
