@@ -2,6 +2,7 @@ package net.darkcrow.hauntedinfestation.items;
 
 import java.util.List;
 
+import net.darkcrow.hauntedinfestation.HauntedInfestation;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +19,7 @@ public class ItemTileEntitySoulStatue extends ItemBlock {
     public ItemTileEntitySoulStatue(Block block) {
     
         super(block);
-        this.setCreativeTab(CreativeTabs.tabMisc);
+        this.setCreativeTab(HauntedInfestation.tabsHaunted);
         this.setUnlocalizedName("haunted:soulstatue");
     }
     

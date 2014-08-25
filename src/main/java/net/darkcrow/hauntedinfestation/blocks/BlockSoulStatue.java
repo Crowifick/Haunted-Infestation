@@ -1,11 +1,11 @@
 package net.darkcrow.hauntedinfestation.blocks;
 
+import net.darkcrow.hauntedinfestation.HauntedInfestation;
 import net.darkcrow.hauntedinfestation.tileentity.TileEntitySoulStatue;
 import net.darkcrow.hauntedinfestation.util.Utilities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -27,7 +27,7 @@ public class BlockSoulStatue extends BlockContainer {
         super(Material.rock);
         this.setBlockName("soulStatue");
         this.setBlockTextureName("stone");
-        this.setCreativeTab(CreativeTabs.tabMisc);
+        this.setCreativeTab(HauntedInfestation.tabsHaunted);
         this.setLightOpacity(0);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.25F, 1.0F);
         this.setHardness(3.0f);

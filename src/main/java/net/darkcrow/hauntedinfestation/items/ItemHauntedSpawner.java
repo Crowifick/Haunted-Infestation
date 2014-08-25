@@ -3,6 +3,7 @@ package net.darkcrow.hauntedinfestation.items;
 import java.util.Iterator;
 import java.util.List;
 
+import net.darkcrow.hauntedinfestation.HauntedInfestation;
 import net.darkcrow.hauntedinfestation.entitys.HIEntityList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -31,9 +32,8 @@ public class ItemHauntedSpawner extends Item {
     
     public ItemHauntedSpawner() {
     
-        // TODO: Switch creative tab to our own tab later.
         this.setHasSubtypes(true);
-        this.setCreativeTab(CreativeTabs.tabMisc);
+        this.setCreativeTab(HauntedInfestation.tabsHaunted);
     }
     
     /**

@@ -4,9 +4,12 @@ import java.util.Arrays;
 
 import net.darkcrow.hauntedinfestation.blocks.HIBlocks;
 import net.darkcrow.hauntedinfestation.entitys.HIEntitys;
+import net.darkcrow.hauntedinfestation.handler.RenderingHandler;
 import net.darkcrow.hauntedinfestation.items.HIItems;
 import net.darkcrow.hauntedinfestation.proxys.CommonProxy;
 import net.darkcrow.hauntedinfestation.util.Reference;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.SidedProxy;
@@ -16,6 +19,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(name = Reference.NAME, modid = Reference.MODID, version = Reference.VERSION)
 public class HauntedInfestation {
+    
+    public static CreativeTabs tabsHaunted = new CreativeTabHaunted();
     
     @Mod.Instance(Reference.MODID)
     public static HauntedInfestation instance;
@@ -31,6 +36,8 @@ public class HauntedInfestation {
         new HIItems();
         new HIEntitys();
         proxy.registerRenders();
+        proxy.registerSidedEvents();
+        MinecraftForge.EVENT_BUS.register(new RenderingHandler());
     }
     
     @Mod.EventHandler
