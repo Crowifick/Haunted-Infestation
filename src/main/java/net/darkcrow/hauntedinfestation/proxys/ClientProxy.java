@@ -21,4 +21,9 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul(new ModelSoul(true), 1.0F));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(HIBlocks.soulStatue), new RendererItemTileEntitySoul());
     }
+    
+    @Override
+    public void registerSidedEvents () {
+    
+    }
 }
