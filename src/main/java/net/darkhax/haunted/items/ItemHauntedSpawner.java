@@ -3,8 +3,8 @@ package net.darkhax.haunted.items;
 import java.util.Iterator;
 import java.util.List;
 
-import net.darkhax.haunted.HauntedInfestation;
-import net.darkhax.haunted.entitys.HIEntityList;
+import net.darkhax.haunted.Haunted;
+import net.darkhax.haunted.entitys.HauntedEntityList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -33,7 +33,7 @@ public class ItemHauntedSpawner extends Item {
     public ItemHauntedSpawner() {
     
         this.setHasSubtypes(true);
-        this.setCreativeTab(HauntedInfestation.tabsHaunted);
+        this.setCreativeTab(Haunted.tabsHaunted);
     }
     
     /**
@@ -43,7 +43,7 @@ public class ItemHauntedSpawner extends Item {
     public String getItemStackDisplayName (ItemStack stack) {
     
         String display = ("" + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name")).trim();
-        String entityName = HIEntityList.getStringFromID(stack.getItemDamage());
+        String entityName = HauntedEntityList.getStringFromID(stack.getItemDamage());
         
         if (entityName != null)
             display = display + " " + StatCollector.translateToLocal("entity." + entityName + ".name");
@@ -58,7 +58,7 @@ public class ItemHauntedSpawner extends Item {
     @SideOnly(Side.CLIENT)
     public int getColorFromItemStack (ItemStack stack, int pass) {
     
-        HIEntityList.EntityEggInfo entityegginfo = (HIEntityList.EntityEggInfo) HIEntityList.entityEggs.get(Integer.valueOf(stack.getItemDamage()));
+        HauntedEntityList.EntityEggInfo entityegginfo = (HauntedEntityList.EntityEggInfo) HauntedEntityList.entityEggs.get(Integer.valueOf(stack.getItemDamage()));
         return entityegginfo != null ? (pass == 0 ? entityegginfo.primaryColor : entityegginfo.secondaryColor) : 16777215;
     }
     
@@ -155,7 +155,7 @@ public class ItemHauntedSpawner extends Item {
      */
     public static Entity spawnCreature (World world, int entityID, double x, double y, double z) {
     
-        if (!HIEntityList.entityEggs.containsKey(Integer.valueOf(entityID))) {
+        if (!HauntedEntityList.entityEggs.containsKey(Integer.valueOf(entityID))) {
             
             return null;
         }
@@ -166,7 +166,7 @@ public class ItemHauntedSpawner extends Item {
             
             for (int j = 0; j < 1; ++j) {
                 
-                entity = HIEntityList.createEntityByID(entityID, world);
+                entity = HauntedEntityList.createEntityByID(entityID, world);
                 
                 if (entity != null && entity instanceof EntityLivingBase) {
                     
@@ -210,11 +210,11 @@ public class ItemHauntedSpawner extends Item {
     @SideOnly(Side.CLIENT)
     public void getSubItems (Item item, CreativeTabs tab, List itemList) {
     
-        Iterator iterator = HIEntityList.entityEggs.values().iterator();
+        Iterator iterator = HauntedEntityList.entityEggs.values().iterator();
         
         while (iterator.hasNext()) {
             
-            HIEntityList.EntityEggInfo entityegginfo = (HIEntityList.EntityEggInfo) iterator.next();
+            HauntedEntityList.EntityEggInfo entityegginfo = (HauntedEntityList.EntityEggInfo) iterator.next();
             itemList.add(new ItemStack(item, 1, entityegginfo.entityID));
         }
     }

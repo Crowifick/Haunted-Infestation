@@ -2,10 +2,10 @@ package net.darkhax.haunted;
 
 import java.util.Arrays;
 
-import net.darkhax.haunted.blocks.HIBlocks;
-import net.darkhax.haunted.entitys.HIEntitys;
+import net.darkhax.haunted.blocks.HauntedBlocks;
+import net.darkhax.haunted.entitys.HauntedEntitys;
 import net.darkhax.haunted.handler.RenderingHandler;
-import net.darkhax.haunted.items.HIItems;
+import net.darkhax.haunted.items.HauntedItems;
 import net.darkhax.haunted.proxys.CommonProxy;
 import net.darkhax.haunted.util.Constants;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,12 +18,12 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(name = Constants.NAME, modid = Constants.MODID, version = Constants.VERSION)
-public class HauntedInfestation {
+public class Haunted {
     
     public static CreativeTabs tabsHaunted = new CreativeTabHaunted();
     
     @Mod.Instance(Constants.MODID)
-    public static HauntedInfestation instance;
+    public static Haunted instance;
     
     @SidedProxy(clientSide = Constants.CLIENT, serverSide = Constants.COMMON)
     public static CommonProxy proxy;
@@ -32,9 +32,9 @@ public class HauntedInfestation {
     public void preInit (FMLPreInitializationEvent event) {
     
         setModInfo(event.getModMetadata());
-        new HIBlocks();
-        new HIItems();
-        new HIEntitys();
+        new HauntedBlocks();
+        new HauntedItems();
+        new HauntedEntitys();
         proxy.registerRenders();
         proxy.registerSidedEvents();
         MinecraftForge.EVENT_BUS.register(new RenderingHandler());

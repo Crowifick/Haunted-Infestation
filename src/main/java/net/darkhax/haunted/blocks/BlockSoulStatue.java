@@ -1,6 +1,6 @@
 package net.darkhax.haunted.blocks;
 
-import net.darkhax.haunted.HauntedInfestation;
+import net.darkhax.haunted.Haunted;
 import net.darkhax.haunted.tileentity.TileEntitySoulStatue;
 import net.darkhax.haunted.util.Utilities;
 import net.minecraft.block.Block;
@@ -27,7 +27,7 @@ public class BlockSoulStatue extends BlockContainer {
         super(Material.rock);
         this.setBlockName("soulStatue");
         this.setBlockTextureName("stone");
-        this.setCreativeTab(HauntedInfestation.tabsHaunted);
+        this.setCreativeTab(Haunted.tabsHaunted);
         this.setLightOpacity(0);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.25F, 1.0F);
         this.setHardness(3.0f);
@@ -107,7 +107,7 @@ public class BlockSoulStatue extends BlockContainer {
     @Override
     public boolean removedByPlayer (World world, EntityPlayer player, int x, int y, int z) {
     
-        ItemStack stack = new ItemStack(HIBlocks.soulStatue);
+        ItemStack stack = new ItemStack(HauntedBlocks.soulStatue);
         TileEntitySoulStatue tile = (TileEntitySoulStatue) world.getTileEntity(x, y, z);
         stack.setTagCompound(new NBTTagCompound());
         stack.setStackDisplayName(tile.getPlayerName());

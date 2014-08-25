@@ -1,6 +1,6 @@
 package net.darkhax.haunted.proxys;
 
-import net.darkhax.haunted.blocks.HIBlocks;
+import net.darkhax.haunted.blocks.HauntedBlocks;
 import net.darkhax.haunted.entitys.EntitySoul;
 import net.darkhax.haunted.renderer.entity.RenderSoul;
 import net.darkhax.haunted.renderer.item.RendererItemTileEntitySoul;
@@ -19,7 +19,7 @@ public class ClientProxy extends CommonProxy {
     
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySoulStatue.class, new RenderTileEntitySoul());
         RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul(new ModelSoul(true), 1.0F));
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(HIBlocks.soulStatue), new RendererItemTileEntitySoul());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(HauntedBlocks.soulStatue), new RendererItemTileEntitySoul());
     }
     
     @Override

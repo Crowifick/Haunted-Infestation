@@ -7,6 +7,7 @@ import net.minecraft.util.MathHelper;
 
 public class ModelSoul extends ModelBase {
     
+    // TODO The arm on the left side needs to use the correct textures.
     boolean entity = true;
     ModelRenderer head;
     ModelRenderer headgear;

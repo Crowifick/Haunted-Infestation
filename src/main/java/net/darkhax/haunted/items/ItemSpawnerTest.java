@@ -2,7 +2,7 @@ package net.darkhax.haunted.items;
 
 import java.util.List;
 
-import net.darkhax.haunted.HauntedInfestation;
+import net.darkhax.haunted.Haunted;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,7 +19,7 @@ public class ItemSpawnerTest extends Item {
     public ItemSpawnerTest() {
     
         super();
-        this.setCreativeTab(HauntedInfestation.tabsHaunted);
+        this.setCreativeTab(Haunted.tabsHaunted);
         this.setUnlocalizedName("spawner");
     }
     

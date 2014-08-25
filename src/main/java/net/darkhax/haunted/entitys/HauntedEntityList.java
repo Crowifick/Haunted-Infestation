@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class HIEntityList {
+public class HauntedEntityList {
     
     private static final Logger logger = LogManager.getLogger();
     
@@ -61,7 +61,7 @@ public class HIEntityList {
     public static void addMapping (Class clazz, String name, int id, int primary, int secondary) {
     
         addMapping(clazz, name, id);
-        entityEggs.put(Integer.valueOf(id), new HIEntityList.EntityEggInfo(id, primary, secondary));
+        entityEggs.put(Integer.valueOf(id), new HauntedEntityList.EntityEggInfo(id, primary, secondary));
     }
     
     /**

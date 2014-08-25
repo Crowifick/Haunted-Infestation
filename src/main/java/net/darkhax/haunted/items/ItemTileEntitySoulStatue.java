@@ -2,7 +2,7 @@ package net.darkhax.haunted.items;
 
 import java.util.List;
 
-import net.darkhax.haunted.HauntedInfestation;
+import net.darkhax.haunted.Haunted;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +19,7 @@ public class ItemTileEntitySoulStatue extends ItemBlock {
     public ItemTileEntitySoulStatue(Block block) {
     
         super(block);
-        this.setCreativeTab(HauntedInfestation.tabsHaunted);
+        this.setCreativeTab(Haunted.tabsHaunted);
         this.setUnlocalizedName("haunted:soulstatue");
     }
     
